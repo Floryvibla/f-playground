@@ -1,3 +1,4 @@
+import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -15,6 +16,15 @@ export async function POST(request: NextRequest) {
 
   try {
     const eventData = await request.json();
+    await axios.post(
+      "https://4f53-2804-1b3-a900-3ab7-491f-ad02-6d14-b88b.ngrok-free.app/webhook-test/asana-teste",
+      { data: eventData },
+      {
+        // Ignorar erro de certificado autoassinado
+        httpsAgent: new (require("https").Agent)({ rejectUnauthorized: false }),
+      }
+    );
+    console.log("webhook deu certo: ");
     console.log("Evento recebido:", eventData);
 
     // Adicione aqui o processamento do evento, como salvar no banco de dados
