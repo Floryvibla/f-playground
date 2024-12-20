@@ -29,30 +29,30 @@ export function DesignPost({
     }
   };
 
-  useEffect(() => {
-    if (autoInicial) {
-      const handleGenerateImage = async () => {
-        if (ref.current) {
-          const dataUrl = await toPng(ref.current, sizeImage);
+  // useEffect(() => {
+  //   if (autoInicial) {
+  //     const handleGenerateImage = async () => {
+  //       if (ref.current) {
+  //         const dataUrl = await toPng(ref.current, sizeImage);
 
-          const response = await fetch("/api/design", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ image: dataUrl }),
-          });
+  //         const response = await fetch("/api/design", {
+  //           method: "POST",
+  //           headers: { "Content-Type": "application/json" },
+  //           body: JSON.stringify({ image: dataUrl }),
+  //         });
 
-          const result = await response.json();
-          setImageResult(result.url);
-          console.log("Image URL:", result.url);
-        }
-      };
-      handleGenerateImage();
-    }
-  }, [autoInicial]);
+  //         const result = await response.json();
+  //         setImageResult(result.url);
+  //         console.log("Image URL:", result.url);
+  //       }
+  //     };
+  //     handleGenerateImage();
+  //   }
+  // }, [autoInicial]);
 
-  if (imageResult) {
-    return imageResult;
-  }
+  // if (imageResult) {
+  //   return imageResult;
+  // }
 
   return (
     <div>
@@ -64,7 +64,8 @@ export function DesignPost({
       </button>
       <div
         ref={ref}
-        className={`relative bg-slate-400 ${
+        id="design-content"
+        className={`relative bg-red-400 ${
           autoInicial || isExportImage
             ? "w-[1080px] h-[1350px]"
             : "w-[328px] h-[460px]"
