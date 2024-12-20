@@ -4,12 +4,15 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const userUrl = searchParams.get("url");
+
+    console.log("userUrl: ", userUrl);
+
     const imageUrl =
-      userUrl === "default"
+      userUrl !== "default"
         ? userUrl
         : "https://homolog.plyn.com.br/africanize/wp-content/uploads/2024/12/cynthia-wicked.webp";
 
-    const response = await fetch(imageUrl);
+    const response = await fetch(imageUrl!);
     const buffer = await response.arrayBuffer();
 
     // Retorna a imagem com o tipo de conteúdo apropriado
