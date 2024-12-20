@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET() {
   let result = null;
   let browser = null;
   try {
