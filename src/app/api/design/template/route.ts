@@ -1,11 +1,19 @@
 import { puppeteerLib } from "@/lib/puppeteer";
+import { generateUUID } from "@/lib/utils";
 import { DesignTemplateRequest } from "@/types/design-template";
+import fs from "fs";
+import path from "path";
+import { uploadAttachmentAsana } from "@/lib/asana"; // Importe a função de upload
+
+interface IUploadAttachment extends DesignTemplateRequest {
+  taskId: string;
+}
 
 export async function POST(req: Request) {
-  const data: DesignTemplateRequest = await req.json();
+  const data: IUploadAttachment = await req.json();
   if (!data?.url) {
     return Response.json(
-      { error: "url da image está faltando" },
+      { error: "url da imagem está faltando" },
       { status: 500 }
     );
   }
@@ -57,12 +65,29 @@ export async function POST(req: Request) {
 
     await browser.close();
 
-    return new Response(screenshot, {
-      headers: {
-        "Content-Type": "image/png",
-      },
-    });
-    // return Response.json({ teste: "Tudo okey" });
+    const idImg = generateUUID();
+    const filePath = path.join(
+      process.cwd(),
+      "public",
+      "uploads",
+      `${idImg}.png`
+    );
+
+    // Salva a imagem gerada
+    fs.writeFileSync(filePath, screenshot, "binary");
+
+    // const imageUrl = `/uploads/${idImg}.png`;
+
+    // Agora chama a função de upload passando os parâmetros
+    const parentId = data.taskId; // Exemplo de ID do "parent"
+    const filename = `${idImg}.png`; // Nome do arquivo gerado
+    const uploadResponse = await uploadAttachmentAsana(
+      parentId,
+      filePath,
+      filename
+    );
+
+    return Response.json({ response: uploadResponse });
   } catch (error) {
     console.log("Error: ", error);
     return Response.json({ error: "Falha ao processar" }, { status: 500 });

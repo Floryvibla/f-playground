@@ -11,6 +11,7 @@
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@sparticuz/chromium": "^131.0.1",
+    "asana": "^3.0.12",
     "axios": "^1.7.9",
     "html-to-image": "^1.11.11",
     "next": "15.1.0",
@@ -20,6 +21,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/asana": "^0.18.16",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
