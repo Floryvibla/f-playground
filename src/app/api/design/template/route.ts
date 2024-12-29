@@ -81,11 +81,11 @@ export async function POST(req: Request) {
     // Agora chama a função de upload passando os parâmetros
     const parentId = data.taskId; // Exemplo de ID do "parent"
     const filename = `${idImg}.png`; // Nome do arquivo gerado
-    const uploadResponse = await uploadAttachmentAsana(
+    const uploadResponse = await uploadAttachmentAsana({
       parentId,
       filePath,
-      filename
-    );
+      filename,
+    });
 
     return Response.json({ response: uploadResponse });
   } catch (error) {
