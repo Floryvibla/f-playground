@@ -7,16 +7,20 @@ export const asanaApi = axios.create({
   baseURL: "https://app.asana.com/api/1.0",
   headers: {
     Authorization:
-      "Bearer 2/1188252661281088/1208982567072800:f65d9fe56db7d8841e56b03b1a1a20f3", // Substitua com o seu token
+      "Bearer 2/1209051275427068/1209055801183222:21c73655bbf7a298e86582ad87ce8299",
   },
 });
 
 // Função para upload de anexo no Asana
-export async function uploadAttachmentAsana(
-  parentId: string,
-  filePath: string,
-  filename: string
-) {
+export async function uploadAttachmentAsana({
+  filePath,
+  filename,
+  parentId,
+}: {
+  parentId: string;
+  filePath: string;
+  filename: string;
+}) {
   try {
     // Crie o FormData
     const formData = new FormData();

@@ -1,4 +1,4 @@
-import { base64ToImage } from "@/lib/utils";
+import { base64ToImage, urlImgToBase64 } from "@/lib/utils";
 
 export async function POST(req: Request) {
   const data: { base64Img: string; imageUrl: string } = await req.json();
@@ -6,9 +6,7 @@ export async function POST(req: Request) {
   let dataBase64;
 
   if ("imageUrl" in data) {
-    const response = await fetch(data.imageUrl);
-    const arrayBuffer = await response.arrayBuffer();
-    const base64 = Buffer.from(arrayBuffer).toString("base64");
+    const base64 = await urlImgToBase64(data.imageUrl);
 
     dataBase64 = base64.toString();
   }

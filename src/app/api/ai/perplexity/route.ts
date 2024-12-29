@@ -1,7 +1,7 @@
 import { fetchperplexityStream } from "@/lib/perplexity-fake";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const content = searchParams.get("content");
   if (!content) {

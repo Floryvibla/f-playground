@@ -1,6 +1,12 @@
 import axios from "axios";
 
-export async function dailyDevByTagFeed({ tag }: { tag: string }) {
+export async function dailyDevByTagFeed({
+  tag,
+  limite = 14,
+}: {
+  tag: string;
+  limite?: number;
+}) {
   try {
     const response = await axios.post("https://api.daily.dev/graphql", {
       query: `
@@ -52,7 +58,7 @@ export async function dailyDevByTagFeed({ tag }: { tag: string }) {
       variables: {
         tag,
         ranking: "TIME",
-        first: 50,
+        first: limite,
         after: "",
       },
     });

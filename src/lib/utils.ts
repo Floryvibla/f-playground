@@ -36,3 +36,11 @@ export function sortByDate(articles: any[], key: string): any[] {
     return dateB.getTime() - dateA.getTime();
   });
 }
+
+export async function urlImgToBase64(imageUrl: string) {
+  const response = await fetch(imageUrl);
+  const arrayBuffer = await response.arrayBuffer();
+  const base64 = Buffer.from(arrayBuffer).toString("base64");
+
+  return base64;
+}
