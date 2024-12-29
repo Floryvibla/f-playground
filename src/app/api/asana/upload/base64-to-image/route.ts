@@ -1,13 +1,23 @@
 import { base64ToImage } from "@/lib/utils";
-import { error } from "console";
 
 export async function POST(req: Request) {
-  const data: any = await req.json();
-  if (!("base64Img" in data)) {
-    return Response.json({ error: "Precisa de base64Img" }, { status: 401 });
+  const data: { base64Img: string; imageUrl: string } = await req.json();
+
+  let dataBase64;
+
+  if ("imageUrl" in data) {
+    const response = await fetch(data.imageUrl);
+    const arrayBuffer = await response.arrayBuffer();
+    const base64 = Buffer.from(arrayBuffer).toString("base64");
+
+    dataBase64 = base64.toString();
   }
+  if ("base64Img" in data) {
+    dataBase64 = data.base64Img;
+  }
+
   try {
-    const response = base64ToImage(data.base64Img);
+    const response = base64ToImage(dataBase64!);
     if (response?.error) {
       return Response.json({ response }, { status: 401 });
     }

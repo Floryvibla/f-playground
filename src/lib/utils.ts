@@ -13,7 +13,12 @@ export const base64ToImage = (base64Data: string): any => {
   if (!base64Data) {
     return { error: "Base64 data is required" };
   }
-  const base64String = base64Data.replace(/^data:image\/png;base64,/, "");
+
+  const base64String = base64Data.replace(
+    /^data:image\/(jpeg|png);base64,/,
+    ""
+  );
+
   const idImg = generateUUID();
   const filename = `${idImg}.png`;
   const filePath = path.join(process.cwd(), "public", "uploads", filename);
@@ -23,3 +28,11 @@ export const base64ToImage = (base64Data: string): any => {
   const imageUrl = `${process.env.NEXT_PUBLIC_FRONT}/uploads/${idImg}.png`;
   return { filePath, filename, imageUrl };
 };
+
+export function sortByDate(articles: any[], key: string): any[] {
+  return articles.sort((a, b) => {
+    const dateA = new Date(a[key]);
+    const dateB = new Date(b[key]);
+    return dateB.getTime() - dateA.getTime();
+  });
+}
