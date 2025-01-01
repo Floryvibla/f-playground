@@ -51,16 +51,16 @@ export async function POST(req: Request) {
     const message = messaging?.message;
 
     // console.log("Json: " + JSON.stringify(responseReq, null, 2));
-    await sendMsgInstagram({
-      idSender: messaging.sender.id,
-      msg: "Iniciando os trabalho...",
-    });
 
     if (!messaging) {
       return Response.json({ response: "ok!" });
     }
 
     if (message && "attachments" in message) {
+      await sendMsgInstagram({
+        idSender: messaging.sender.id,
+        msg: "Iniciando os trabalho...",
+      });
       console.log("Is attachments...");
       const attachment = message.attachments[0];
       if (attachment.type === "ig_reel") {
