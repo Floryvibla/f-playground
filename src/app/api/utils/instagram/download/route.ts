@@ -1,7 +1,7 @@
 import { downloadVideoInstagram } from "@/lib/instagram";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const { urlVideo }: { urlVideo: string } = await req.json();
   try {
     const response = await downloadVideoInstagram(urlVideo);

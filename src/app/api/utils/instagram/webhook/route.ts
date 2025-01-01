@@ -1,9 +1,8 @@
 import { getTranscriptionGemini, reelToPost } from "@/app/api/ai/gemini/config";
 import { sendMsgInstagram } from "@/lib/instagram";
-import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const hubChallenge = searchParams.get("hub.challenge");
   try {
