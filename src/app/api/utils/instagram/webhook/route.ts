@@ -50,7 +50,11 @@ export async function POST(req: Request) {
     const messaging = data[0]?.messaging[0];
     const message = messaging?.message;
 
-    console.log("Json: " + JSON.stringify(responseReq, null, 2));
+    // console.log("Json: " + JSON.stringify(responseReq, null, 2));
+    await sendMsgInstagram({
+      idSender: messaging.sender.id,
+      msg: "Iniciando os trabalho...",
+    });
 
     if (!messaging) {
       return Response.json({ response: "ok!" });
