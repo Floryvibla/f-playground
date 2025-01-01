@@ -44,3 +44,6 @@ export async function urlImgToBase64(imageUrl: string) {
 
   return base64;
 }
+
+export const sleep = (ms?: number): Promise<void> =>
+  new Promise((resolve) => setTimeout(resolve, ms ?? 2000));

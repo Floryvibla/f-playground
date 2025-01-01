@@ -14,7 +14,7 @@ export async function puppeteerProd(): Promise<BrowserCore> {
 }
 
 export async function puppeteerDev(): Promise<Browser> {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: true });
 
   return browser;
 }

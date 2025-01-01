@@ -8,9 +8,10 @@ import {
   FileState,
   FileMetadataResponse,
 } from "@google/generative-ai/server";
-import { generateObject } from "ai";
+import { generateObject, generateText } from "ai";
 import { createGoogleGenerativeAI, google } from "@ai-sdk/google";
 import { z } from "zod";
+import { title } from "process";
 
 export const genAI = new GoogleGenerativeAI(
   process.env.GOOGLE_GENERATIVE_AI_API_KEY!
@@ -75,22 +76,8 @@ export async function fileUploadGemini(path?: string) {
   }
 }
 
-export async function getTranscriptionGemini(file?: FileMetadataResponse) {
+export async function getTranscriptionGemini(urlVideo: string) {
   try {
-    // const result = await modelGemini.generateContent([
-    //   {
-    //     fileData: {
-    //       mimeType: "video/mp4",
-    //       fileUri:
-    //         "https://generativelanguage.googleapis.com/v1beta/files/q9w482wl7u5d",
-    //     },
-    //   },
-    //   {
-    //     text: `Gere o subtitle para esse video, escreva o subtitle em formato de SRT, retorna isso no idioma original do video`,
-    //   },
-    // ]);
-    console.log("Agora GenerateObject");
-
     const { object } = await generateObject({
       model: google("gemini-1.5-flash-latest"),
       messages: [
@@ -100,7 +87,7 @@ export async function getTranscriptionGemini(file?: FileMetadataResponse) {
             "Gere o subtitle para esse video, escreva o subtitle em formato de SRT, retorna isso no idioma original do video",
           experimental_attachments: [
             {
-              url: "https://d.rapidcdn.app/snapinsta?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3Njb250ZW50LXdhdzItMi5jZG5pbnN0YWdyYW0uY29tL28xL3YvdDE2L2YyL204Ni9BUU9wZHNTcWRZQXNmMnN2MDBqeDZJNDVCcDMtck11Yi1GS0RvcVFYVUVvcjBNNVc5RDAwbUk2cWNHSmxORGR1SnRiNDBqVXMxVFB0MUpJTU9zQ3NtUWZJNnY4emlLd180TnRlZDhNLm1wND9zdHA9ZHN0LW1wNCZlZmc9ZXlKeFpWOW5jbTkxY0hNaU9pSmJYQ0pwWjE5M1pXSmZaR1ZzYVhabGNubGZkblJ6WDI5MFpsd2lYU0lzSW5abGJtTnZaR1ZmZEdGbklqb2lkblJ6WDNadlpGOTFjbXhuWlc0dVkyeHBjSE11WXpJdU56SXdMbUpoYzJWc2FXNWxJbjAmX25jX2NhdD0xMDAmdnM9MTY4MDQ1Mzk0OTQxMzU2MV82NzIxNzAxOTcmX25jX3ZzPUhCa3NGUUlZVW1sblgzaHdkbDl5WldWc2MxOXdaWEp0WVc1bGJuUmZjM0pmY0hKdlpDODNNRFJETmtaQk16YzFSRVV6UWtRNE5FSTFPVGM0TVRnMk1ETXlNREZCUWw5MmFXUmxiMTlrWVhOb2FXNXBkQzV0Y0RRVkFBTElBUUFWQWhnNmNHRnpjM1JvY205MVoyaGZaWFpsY25OMGIzSmxMMGRCYVRGUmFIUmZTM05WVjNnd2MwUkJSbVEzVG1sUmVubFZTakppY1Y5RlFVRkJSaFVDQXNnQkFDZ0FHQUFiQUJVQUFDYUNxdnFRJTJGNmFNUUJVQ0tBSkRNeXdYUUZBeEJpVGRMeHNZRW1SaGMyaGZZbUZ6Wld4cGJtVmZNVjkyTVJFQWRmNEhBQSUzRCUzRCZjY2I9OS00Jm9oPTAwX0FZRGdnVXNDeEgzWXpLRzhIUnJQXzBJOHUxbkRwaWVJVVoxRmlXMjA4TC13N1Emb2U9Njc3NjUzRTkmX25jX3NpZD0xMGQxM2IiLCJmaWxlbmFtZSI6IlNuYXBpbnN0YS5hcHBfdmlkZW9fQVFPcGRzU3FkWUFzZjJzdjAwang2STQ1QnAzLXJNdWItRktEb3FRWFVFb3IwTTVXOUQwMG1JNnFjR0psTkRkdUp0YjQwalVzMVRQdDFKSU1Pc0NzbVFmSTZ2OHppS3dfNE50ZWQ4TS5tcDQifQ.-sBNb8kczNzaGKqOAjaIXF_4BgS67Qy9jwe2no2j0QM&dl=1&dl=1",
+              url: urlVideo,
               contentType: "video/mp4",
             },
           ],
@@ -121,3 +108,49 @@ export async function getTranscriptionGemini(file?: FileMetadataResponse) {
     throw error;
   }
 }
+
+export async function reelToPost(transcription: string) {
+  try {
+    const { object } = await generateObject({
+      model: google("gemini-1.5-flash-latest"),
+      prompt: `
+      ${promptVideoToPost}
+      ---
+      ${transcription}
+      `,
+      schema: z.object({
+        title: z.string().describe("Gere um titulo para o post"),
+        description: z.string().describe("Explique o que o post vai fazer"),
+        cover_propmt: z.string().describe("prompt pra geração de imagem"),
+        content: z
+          .string()
+          .max(900)
+          .describe("Conteúdo do post em até 900 caracteres"),
+      }),
+    });
+    return object;
+  } catch (error) {
+    throw error;
+  }
+}
+
+const promptVideoToPost = `
+Você receberá a transcrição de um vídeo. Sua tarefa é criar um post para o LinkedIn baseado no conteúdo do vídeo, como se fosse eu escrevendo.
+
+O post deve seguir estas diretrizes:  
+1. Comece com um hook chamativo: Algo que capture atenção imediatamente e instigue curiosidade.  
+2. Explique a ideia principal do vídeo: Escreva como se o pensamento fosse seu, de forma clara, prática e com analogias, se necessário, para facilitar o entendimento.  
+3. Escreva no estilo Flory-pro: Use um tom descontraído e profissional, conectando o conteúdo ao dia a dia do leitor. Use listas e parágrafos curtos para facilitar a leitura.  
+4. Conclua com uma chamada à ação: Provoque reflexão ou engajamento com perguntas ou convites para o debate.
+5. o conteudo deve ter até 900 caracteres
+6. gere o conteudo em portugues.
+7. Evite emojis.
+
+Entrada Exemplo:  
+- Transcrição: "Neste vídeo, falamos sobre como IA pode ajudar profissionais autônomos a criar estratégias de marketing mais rapidamente, otimizando tempo e esforço."  
+
+Saída Exemplo:  
+"E se você pudesse criar estratégias de marketing em metade do tempo?
+A inteligência artificial está mudando o jogo para profissionais autônomos. Ferramentas certas podem ajudar a criar campanhas alinhadas, economizar horas e ainda deixar você focar no que importa: crescer.  
+Já imaginou o impacto disso no seu negócio?"  
+`;
