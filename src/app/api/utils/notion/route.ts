@@ -1,9 +1,6 @@
-// Importações
-import { notion, notionLib } from "@/lib/notion";
-import { NextRequest, NextResponse } from "next/server";
+import { notionLib } from "@/lib/notion";
 
-// Função GET
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET() {
   try {
     const database = await notionLib.createPageDatabase({
       database_id: "16de28dda56c8076b985ca280e0b0752",
@@ -17,7 +14,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
   }
 }
 
-// Função POST
 export async function POST(req: Request) {
   const { data }: { data: string } = await req.json();
   try {
