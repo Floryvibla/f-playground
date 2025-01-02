@@ -1,5 +1,6 @@
 import { getTranscriptionGemini, reelToPost } from "@/app/api/ai/gemini/config";
 import { sendMsgInstagram } from "@/lib/instagram";
+import { notionLib } from "@/lib/notion";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -66,17 +67,27 @@ export async function POST(req: Request) {
       if (attachment.type === "ig_reel") {
         console.log("Is Video reel...");
         const videoUrl = attachment.payload.url;
+
         console.log("Pegando transcription...");
         const transcription = await getTranscriptionGemini(videoUrl);
+
         console.log("Esperando criar post baseado no video...");
         const resultReelToPost = await reelToPost(
           JSON.stringify(transcription)
         );
+
+        console.log("Adicionando no notion...");
+        const responseNotion: any = await notionLib.createPageDatabase({
+          database_id: "16de28dda56c8076b985ca280e0b0752",
+          post: resultReelToPost,
+        });
+
         console.log("Respondendo a msg...: ", resultReelToPost);
         await sendMsgInstagram({
           idSender: messaging.sender.id,
-          msg: resultReelToPost.content,
+          msg: responseNotion.url,
         });
+
         return Response.json({ response: resultReelToPost, videoUrl });
       }
     }

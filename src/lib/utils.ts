@@ -47,3 +47,18 @@ export async function urlImgToBase64(imageUrl: string) {
 
 export const sleep = (ms?: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms ?? 2000));
+
+export function splitTextIntoChunks(
+  text: string,
+  chunkSize: number = 1900
+): string[] {
+  const chunks: string[] = [];
+  let start = 0;
+
+  while (start < text.length) {
+    chunks.push(text.slice(start, start + chunkSize));
+    start += chunkSize;
+  }
+
+  return chunks;
+}

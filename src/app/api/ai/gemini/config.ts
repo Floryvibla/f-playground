@@ -121,11 +121,12 @@ export async function reelToPost(transcription: string) {
       schema: z.object({
         title: z.string().describe("Gere um titulo para o post"),
         description: z.string().describe("Explique o que o post vai fazer"),
-        cover_propmt: z.string().describe("prompt pra geração de imagem"),
-        content: z
+        cover_prompt: z
           .string()
-          .max(900)
-          .describe("Conteúdo do post em até 900 caracteres"),
+          .describe(
+            "prompt pra geração de imagem em inglês. se for usar pessoas, tem que ser uma pessoa negra"
+          ),
+        content: z.string().describe("Conteúdo do post em até 900 caracteres"),
       }),
     });
     return object;
@@ -142,9 +143,8 @@ O post deve seguir estas diretrizes:
 2. Explique a ideia principal do vídeo: Escreva como se o pensamento fosse seu, de forma clara, prática e com analogias, se necessário, para facilitar o entendimento.  
 3. Escreva no estilo Flory-pro: Use um tom descontraído e profissional, conectando o conteúdo ao dia a dia do leitor. Use listas e parágrafos curtos para facilitar a leitura.  
 4. Conclua com uma chamada à ação: Provoque reflexão ou engajamento com perguntas ou convites para o debate.
-5. o conteudo deve ter até 900 caracteres
-6. gere o conteudo em portugues.
-7. Evite emojis.
+5. gere o conteudo em portugues.
+6. Evite emojis.
 
 Entrada Exemplo:  
 - Transcrição: "Neste vídeo, falamos sobre como IA pode ajudar profissionais autônomos a criar estratégias de marketing mais rapidamente, otimizando tempo e esforço."  
