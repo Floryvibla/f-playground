@@ -31,11 +31,11 @@ export async function POST(req: Request) {
 
   try {
     const response = await uploadAttachmentAsana({
-      filename: haveBase64Data ? base64Data.filename : data.filename,
-      filePath: haveBase64Data ? base64Data.filePath : data.filePath,
+      filename: haveBase64Data ? base64Data?.filename! : data.filename,
+      filePath: haveBase64Data ? base64Data?.filePath! : data.filePath,
       parentId: data.taskId,
     });
-    fs.unlinkSync(haveBase64Data ? base64Data.filePath : data.filePath);
+    fs.unlinkSync(haveBase64Data ? base64Data?.filePath! : data.filePath);
     return Response.json({ response });
   } catch (error) {
     console.log("Error: ", error);

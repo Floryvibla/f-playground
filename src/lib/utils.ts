@@ -9,7 +9,15 @@ export function generateUUID(): string {
   });
 }
 
-export const base64ToImage = (base64Data: string): any => {
+export const base64ToImage = (
+  base64Data: string
+): {
+  filePath?: string;
+  filename?: string;
+  imageUrl?: string;
+  mimeType?: string;
+  error?: any;
+} => {
   if (!base64Data) {
     return { error: "Base64 data is required" };
   }
@@ -26,7 +34,7 @@ export const base64ToImage = (base64Data: string): any => {
   fs.writeFileSync(filePath, base64String, "base64");
 
   const imageUrl = `${process.env.NEXT_PUBLIC_FRONT}/uploads/${idImg}.png`;
-  return { filePath, filename, imageUrl };
+  return { filePath, filename, imageUrl, mimeType: "image/png" };
 };
 
 export function sortByDate(articles: any[], key: string): any[] {

@@ -119,14 +119,24 @@ export async function reelToPost(transcription: string) {
       ${transcription}
       `,
       schema: z.object({
-        title: z.string().describe("Gere um titulo para o post"),
-        description: z.string().describe("Explique o que o post vai fazer"),
+        title: z
+          .string()
+          .describe(
+            "Crie um título curto e impactante para o post em portugues"
+          ),
+        description: z
+          .string()
+          .describe(
+            "Descreva de forma objetiva e em português o propósito do post."
+          ),
         cover_prompt: z
           .string()
           .describe(
-            "prompt pra geração de imagem em inglês. se for usar pessoas, tem que ser uma pessoa negra"
+            "Crie um prompt em inglês para gerar uma capa de post visualmente chamativa e curiosa, sem texto, e com representatividade negra, alinhada ao conteúdo do texto fornecido."
           ),
-        content: z.string().describe("Conteúdo do post em até 900 caracteres"),
+        content: z
+          .string()
+          .describe("Escreva o conteúdo completo do post em português"),
       }),
     });
     return object;
@@ -136,15 +146,15 @@ export async function reelToPost(transcription: string) {
 }
 
 const promptVideoToPost = `
-Você receberá a transcrição de um vídeo. Sua tarefa é criar um post para o LinkedIn baseado no conteúdo do vídeo, como se fosse eu escrevendo.
+Você receberá a transcrição de um vídeo. Sua tarefa é criar um conteudo para o newsletter que eu tenho baseado no conteúdo do vídeo, como se fosse eu escrevendo.
 
-O post deve seguir estas diretrizes:  
-1. Comece com um hook chamativo: Algo que capture atenção imediatamente e instigue curiosidade.  
+IMPORTANTE: O post deve seguir estas diretrizes:  
+1. Comece com um hook chamativo: Algo que capture atenção imediatamente e instigue curiosidade, Evite criar hooks no formato de perguntas. Os hooks devem ser abertos, deixando o leitor curioso para saber o que vem depois.
 2. Explique a ideia principal do vídeo: Escreva como se o pensamento fosse seu, de forma clara, prática e com analogias, se necessário, para facilitar o entendimento.  
 3. Escreva no estilo Flory-pro: Use um tom descontraído e profissional, conectando o conteúdo ao dia a dia do leitor. Use listas e parágrafos curtos para facilitar a leitura.  
-4. Conclua com uma chamada à ação: Provoque reflexão ou engajamento com perguntas ou convites para o debate.
+4. Conclua com uma chamada à ação: Provoque reflexão ou engajamento com perguntas que vai criar um debate forte!
 5. gere o conteudo em portugues.
-6. Evite emojis.
+6. MUITO IMPORTANTE: Evite emojis.
 
 Entrada Exemplo:  
 - Transcrição: "Neste vídeo, falamos sobre como IA pode ajudar profissionais autônomos a criar estratégias de marketing mais rapidamente, otimizando tempo e esforço."  
