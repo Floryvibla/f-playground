@@ -1,11 +1,11 @@
 export const createNewsletterPrompt = `
-Você receberá a transcrição de um vídeo e deverá criar um conteúdo envolvente para minha newsletter, escrito como se fosse eu. O público da newsletter é formado por pessoas que buscam aprendizado prático e reflexivo. 
+Você receberá a transcrição de um vídeo e deverá criar um conteúdo envolvente para minha newsletter, escrito como se fosse eu. O público da newsletter busca aprendizado prático, reflexivo e aplicável. 
 
 **Diretrizes:**  
 1. **Hook chamativo:** Comece com uma frase que prenda atenção e desperte curiosidade, evitando perguntas diretas.  
-2. **Storytelling:** Crie um pequeno cenário ou história que conecte o tema ao cotidiano do leitor. Isso prepara o terreno para a explicação.  
-3. **Explicação:** Desenvolva a ideia principal do vídeo de forma clara, prática e profunda, adicionando analogias ou exemplos reais.  
-4. **Aplicação prática:** Explique como o leitor pode usar o que aprendeu no dia a dia, com dicas ou passos acionáveis.  
+2. **Storytelling:** Crie um pequeno cenário ou história que conecte o tema ao cotidiano do leitor. Isso ajuda a contextualizar o tema de forma empática e envolvente.  
+3. **Explicação:** Desenvolva a ideia principal do vídeo de forma clara e profunda, adicionando analogias ou exemplos reais para simplificar conceitos.  
+4. **Aplicação prática com simulação:** Explique como o leitor pode aplicar o ensinamento no dia a dia. Vá além de listar passos: simule a execução, mostrando como seria alguém realmente colocando o aprendizado em prática.  
 5. **Estilo Flory-pro:** Escreva com tom descontraído e profissional, utilizando parágrafos curtos e listas para facilitar a leitura.  
 6. **Chamada à ação:** Finalize com perguntas abertas que provoquem reflexão ou incentivem o leitor a compartilhar experiências.  
 7. **Formato:** Responda em português e **NÃO** use emojis.  
@@ -16,13 +16,20 @@ Você receberá a transcrição de um vídeo e deverá criar um conteúdo envolv
 **Saída Exemplo:**  
 "E se você pudesse criar estratégias de marketing em metade do tempo?  
 
-Imagine o João, um profissional autônomo, sentado na mesa de casa, tentando equilibrar a criação de campanhas com o atendimento aos clientes. Ele passa horas planejando, escrevendo e revisando, mas nunca parece ter tempo suficiente. Agora, imagine que ele descobre uma ferramenta de IA que pode ajudá-lo a fazer tudo isso em minutos, com precisão e eficiência.  
+Imagine o João, um profissional autônomo, que luta para criar campanhas de marketing enquanto gerencia clientes. Ele decide testar uma ferramenta de IA que prometeu otimizar seu tempo. Primeiro, ele insere informações sobre seu público-alvo. A ferramenta gera três ideias de campanha em segundos. João escolhe uma, ajusta detalhes e, em seguida, usa outro recurso para planejar os e-mails.  
 
-A inteligência artificial está mudando o jogo para profissionais como o João. Ferramentas certas podem ajudar a criar campanhas alinhadas, economizar horas e ainda deixar você focar no que importa: crescer.  
+Em menos de uma hora, João cria uma estratégia de marketing que normalmente levaria dias. Agora, ele tem mais tempo para focar no atendimento aos seus clientes.  
 
-Por exemplo, imagine que você está criando uma campanha de e-mail marketing. Com IA, você pode gerar ideias de textos, personalizar mensagens e agendar disparos automaticamente. Tudo isso com menos esforço e mais impacto.  
+A inteligência artificial está mudando o jogo para profissionais autônomos. Ferramentas certas podem ajudar a criar campanhas alinhadas, economizar horas e ainda deixar você focar no que importa: crescer.  
 
-Já imaginou o impacto disso no seu negócio?"  
+Por exemplo, no seu caso, imagine que você está criando uma campanha de e-mail marketing. Com IA, você:  
+1. Insere informações sobre seu público.  
+2. Recebe sugestões de mensagens e edita o que preferir.  
+3. Programa disparos automáticos e analisa os resultados.  
 
-Crie o conteúdo com storytelling, profundidade e aplicação prática, sempre alinhado ao público da newsletter.  
+Agora, pense: quanto tempo você economizaria com isso?  
+
+Se já usou algo parecido ou quer tentar, compartilhe sua experiência comigo nos comentários!"  
+
+Crie o conteúdo com storytelling, profundidade e simulação prática, sempre alinhado ao público da newsletter.
 `;
