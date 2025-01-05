@@ -12,6 +12,7 @@ import { generateObject, generateText } from "ai";
 import { createGoogleGenerativeAI, google } from "@ai-sdk/google";
 import { z } from "zod";
 import { title } from "process";
+import { createNewsletterPrompt } from "./prompts";
 
 export const genAI = new GoogleGenerativeAI(
   process.env.GOOGLE_GENERATIVE_AI_API_KEY!
@@ -114,7 +115,7 @@ export async function reelToPost(transcription: string) {
     const { object } = await generateObject({
       model: google("gemini-1.5-flash-latest"),
       prompt: `
-      ${promptVideoToPost}
+      ${createNewsletterPrompt}
       ---
       ${transcription}
       `,
@@ -127,7 +128,7 @@ export async function reelToPost(transcription: string) {
         description: z
           .string()
           .describe(
-            "Descreva de forma objetiva e em português o propósito do post."
+            "Descreva de forma objetiva e em português o propósito do post. O TEXTO TEM QUE SER EM PORTUGUES."
           ),
         cover_prompt: z
           .string()
@@ -136,7 +137,9 @@ export async function reelToPost(transcription: string) {
           ),
         content: z
           .string()
-          .describe("Escreva o conteúdo completo do post em português"),
+          .describe(
+            "Escreva o conteúdo completo do post em português com pelo menos 400 palavras"
+          ),
       }),
     });
     return object;
