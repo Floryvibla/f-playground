@@ -115,7 +115,7 @@ export async function reelToPost(transcription: string) {
     const { object } = await generateObject({
       model: google("gemini-1.5-flash-latest"),
       prompt: `
-      ${createNewsletterPrompt}
+      ${promptVideoToPost}
       ---
       ${transcription}
       `,
