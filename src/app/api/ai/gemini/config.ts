@@ -115,7 +115,7 @@ export async function reelToPost(transcription: string) {
     const { object } = await generateObject({
       model: google("gemini-1.5-flash-latest"),
       prompt: `
-      ${promptVideoToPost}
+      ${promptVideoToPostV1}
       ---
       ${transcription}
       `,
@@ -158,6 +158,27 @@ IMPORTANTE: O post deve seguir estas diretrizes:
 4. Conclua com uma chamada à ação: Provoque reflexão ou engajamento com perguntas que vai criar um debate forte!
 5. gere o conteudo em portugues.
 6. MUITO IMPORTANTE: Evite emojis.
+
+Entrada Exemplo:  
+- Transcrição: "Neste vídeo, falamos sobre como IA pode ajudar profissionais autônomos a criar estratégias de marketing mais rapidamente, otimizando tempo e esforço."  
+
+Saída Exemplo:  
+"E se você pudesse criar estratégias de marketing em metade do tempo?
+A inteligência artificial está mudando o jogo para profissionais autônomos. Ferramentas certas podem ajudar a criar campanhas alinhadas, economizar horas e ainda deixar você focar no que importa: crescer.  
+Já imaginou o impacto disso no seu negócio?"  
+`;
+
+const promptVideoToPostV1 = `
+Você receberá a transcrição de um vídeo. Sua tarefa é criar um post para o LinkedIn baseado no conteúdo do vídeo, como se fosse eu escrevendo.
+
+O post deve seguir estas diretrizes:  
+1. Comece com um hook chamativo: Algo que capture atenção imediatamente e instigue curiosidade.  
+2. Explique a ideia principal do vídeo: Escreva como se o pensamento fosse seu, de forma clara, prática e com analogias, se necessário, para facilitar o entendimento.  
+3. Escreva no estilo Flory-pro: Use um tom descontraído e profissional, conectando o conteúdo ao dia a dia do leitor. Use listas e parágrafos curtos para facilitar a leitura.  
+4. Conclua com uma chamada à ação: Provoque reflexão ou engajamento com perguntas ou convites para o debate.
+5. o conteudo deve ter até 900 caracteres
+6. gere o conteudo em portugues.
+7. Evite emojis.
 
 Entrada Exemplo:  
 - Transcrição: "Neste vídeo, falamos sobre como IA pode ajudar profissionais autônomos a criar estratégias de marketing mais rapidamente, otimizando tempo e esforço."  
