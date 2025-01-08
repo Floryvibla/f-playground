@@ -169,11 +169,12 @@ Já imaginou o impacto disso no seu negócio?"
 `;
 
 const promptVideoToPostV1 = `
-Você receberá a transcrição de um vídeo. Sua tarefa é criar um post para o LinkedIn baseado no conteúdo do vídeo, como se fosse eu escrevendo.
+Você receberá a transcrição de um vídeo. Sua tarefa é criar um post para o LinkedIn baseado no conteúdo do vídeo, como se fosse eu escrevendo seguindo o learn to doing.
 
 O post deve seguir estas diretrizes:  
 1. Comece com um hook chamativo: Algo que capture atenção imediatamente e instigue curiosidade.  
-2. Explique a ideia principal do vídeo: Escreva como se o pensamento fosse seu, de forma clara, prática e com analogias, se necessário, para facilitar o entendimento.  
+2. Explique a ideia principal do vídeo: Escreva como se o pensamento fosse seu, de forma clara, prática e com analogias, se necessário, para facilitar o entendimento.
+3. detalha como executar o que você está ensinando. pode trazer exemplos reais que está mencionando na transcrição, pode trazer exemplos da vida real pra ajudar o leitor a visualizar o que está sendo ensinado.
 3. Escreva no estilo Flory-pro: Use um tom descontraído e profissional, conectando o conteúdo ao dia a dia do leitor. Use listas e parágrafos curtos para facilitar a leitura.  
 4. Conclua com uma chamada à ação: Provoque reflexão ou engajamento com perguntas ou convites para o debate.
 5. gere o conteudo em portugues.
