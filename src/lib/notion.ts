@@ -18,8 +18,9 @@ async function createPageDatabase(data: {
     cover_prompt: string;
     content: string;
   };
+  source: string;
 }) {
-  console.log("post: ", data.post);
+  console.log("post: ");
 
   const children: any = splitTextIntoChunks(data.post.content).map((chunk) => ({
     object: "block",
@@ -51,6 +52,13 @@ async function createPageDatabase(data: {
         {
           text: {
             content: data.post.description,
+          },
+        },
+      ],
+      source: [
+        {
+          text: {
+            content: data.source,
           },
         },
       ],

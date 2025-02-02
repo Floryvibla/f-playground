@@ -42,13 +42,14 @@ export async function POST(req: Request) {
   // } catch (error: any) {
   //   console.log("Error n8n webhoo: ", error.response);
   // }
+  let messaging;
   try {
     console.log("Entramos...");
 
     const data = responseReq.entry.filter(
       (i: any) => i.id !== i.messaging[0].sender.id
     );
-    const messaging = data[0]?.messaging[0];
+    messaging = data[0]?.messaging[0];
     const message = messaging?.message;
 
     // console.log("Json: " + JSON.stringify(responseReq, null, 2));
@@ -65,7 +66,7 @@ export async function POST(req: Request) {
       console.log("Is attachments...");
       const attachment = message.attachments[0];
       if (attachment.type === "ig_reel") {
-        console.log("Is Video reel...");
+        console.log("Is Video reel... ");
         const videoUrl = attachment.payload.url;
 
         console.log("Pegando transcription...");
@@ -80,6 +81,7 @@ export async function POST(req: Request) {
         const responseNotion: any = await notionLib.createPageDatabase({
           database_id: "16de28dda56c8076b985ca280e0b0752",
           post: resultReelToPost,
+          source: videoUrl,
         });
 
         console.log("Respondendo a msg...: ", resultReelToPost);
@@ -95,6 +97,10 @@ export async function POST(req: Request) {
     return Response.json({ response: responseReq });
   } catch (error: any) {
     console.log("Error: ", error.response);
+    await sendMsgInstagram({
+      idSender: messaging.sender.id,
+      msg: "Algo deu errado",
+    });
     return Response.json({ error: "Falha ao processar" }, { status: 500 });
   }
 }
