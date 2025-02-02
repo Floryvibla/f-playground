@@ -122,9 +122,7 @@ export async function reelToPost(transcription: string) {
       schema: z.object({
         title: z
           .string()
-          .describe(
-            "Crie um título curto e impactante para o post em portugues"
-          ),
+          .describe("Crie um título curto para o post em portugues"),
         description: z
           .string()
           .describe(
@@ -133,7 +131,7 @@ export async function reelToPost(transcription: string) {
         cover_prompt: z
           .string()
           .describe(
-            "Crie um prompt em inglês para gerar uma capa de post visualmente chamativa e curiosa, sem texto, e com representatividade negra, alinhada ao conteúdo do texto fornecido."
+            "Crie um prompt em inglês para gerar uma capa de post visualmente chamativa e curiosa, sem texto, alinhada ao conteúdo do texto fornecido."
           ),
         content: z
           .string()
