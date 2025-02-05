@@ -99,7 +99,7 @@ export async function POST(req: Request) {
     console.log("Error: ", error.response);
     await sendMsgInstagram({
       idSender: messaging.sender.id,
-      msg: "Algo deu errado",
+      msg: `Algo deu errado: ${error.response}`,
     });
     return Response.json({ error: "Falha ao processar" }, { status: 500 });
   }
