@@ -77,6 +77,9 @@ export async function fileUploadGemini(path?: string) {
   }
 }
 
+const promptTranscriptionContentPT = `Gere o subtitle para esse video, escreva o subtitle em formato de SRT, retorna isso em portugues BR se o video não estava em portugues brasileiro. seja fiel nas palavras do video.`;
+// const promptTranscriptionContent = `"Gere o subtitle para esse video, escreva o subtitle em formato de SRT, retorna isso no idioma original do video"`;
+
 export async function getTranscriptionGemini(urlVideo: string) {
   try {
     const { object } = await generateObject({
@@ -84,8 +87,7 @@ export async function getTranscriptionGemini(urlVideo: string) {
       messages: [
         {
           role: "user",
-          content:
-            "Gere o subtitle para esse video, escreva o subtitle em formato de SRT, retorna isso no idioma original do video",
+          content: promptTranscriptionContentPT,
           experimental_attachments: [
             {
               url: urlVideo,
@@ -136,7 +138,7 @@ export async function reelToPost(transcription: string) {
         content: z
           .string()
           .describe(
-            "Escreva o conteúdo completo do post em português com pelo menos 400 palavras"
+            "O conteudo da transcrição em portugues e sem minutagem. seja fiel no contexto do conteudo da transcrição."
           ),
       }),
     });

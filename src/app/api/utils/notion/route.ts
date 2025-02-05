@@ -5,6 +5,7 @@ export async function GET() {
     const database = await notionLib.createPageDatabase({
       database_id: "16de28dda56c8076b985ca280e0b0752",
       post: { content: "", cover_prompt: "", description: "", title: "" },
+      source: "",
     });
     return Response.json({
       response: database,

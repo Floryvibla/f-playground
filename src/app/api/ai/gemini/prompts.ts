@@ -12,3 +12,7 @@ Você receberá a transcrição de um vídeo e deverá criar um conteúdo envolv
 **Entrada Exemplo:**  
 - Transcrição: "Neste vídeo, falamos sobre como IA pode ajudar profissionais autônomos a criar estratégias de marketing mais rapidamente, otimizando tempo e esforço."  
 `;
+
+export const promptOnlyContent = `
+    Você receberá a transcrição de um vídeo. sua tarefa será em nao tentar modifcar o conteudo da transcrição, mas sim em limpar ele e colocar ele portugues se não for
+`;
