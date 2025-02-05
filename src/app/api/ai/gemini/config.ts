@@ -97,13 +97,31 @@ export async function getTranscriptionGemini(urlVideo: string) {
         },
       ],
       schema: z.object({
-        subtitles: z.array(
-          z.object({
-            startTime: z.string(),
-            endTime: z.string(),
-            text: z.string(),
-          })
-        ),
+        // subtitles: z.array(
+        //   z.object({
+        //     startTime: z.string(),
+        //     endTime: z.string(),
+        //     text: z.string(),
+        //   })
+        // ),
+        title: z
+          .string()
+          .describe("Crie um título curto para o post em portugues"),
+        description: z
+          .string()
+          .describe(
+            "Descreva de forma objetiva e em português o propósito do post. O TEXTO TEM QUE SER EM PORTUGUES."
+          ),
+        cover_prompt: z
+          .string()
+          .describe(
+            "Crie um prompt em inglês para gerar uma capa de post visualmente chamativa e curiosa, sem texto, alinhada ao conteúdo do texto fornecido."
+          ),
+        content: z
+          .string()
+          .describe(
+            "O conteudo da transcrição em portugues e sem minutagem. seja fiel no contexto do conteudo da transcrição."
+          ),
       }),
     });
     return object;

@@ -73,24 +73,24 @@ export async function POST(req: Request) {
         const transcription = await getTranscriptionGemini(videoUrl);
 
         console.log("Esperando criar post baseado no video...");
-        const resultReelToPost = await reelToPost(
-          JSON.stringify(transcription)
-        );
+        // const resultReelToPost = await reelToPost(
+        //   JSON.stringify(transcription)
+        // );
 
         console.log("Adicionando no notion...");
         const responseNotion: any = await notionLib.createPageDatabase({
           database_id: "16de28dda56c8076b985ca280e0b0752",
-          post: resultReelToPost,
+          post: transcription,
           source: videoUrl,
         });
 
-        console.log("Respondendo a msg...: ", resultReelToPost);
+        console.log("Respondendo a msg...: ", transcription);
         await sendMsgInstagram({
           idSender: messaging.sender.id,
           msg: responseNotion.url,
         });
 
-        return Response.json({ response: resultReelToPost, videoUrl });
+        return Response.json({ response: transcription, videoUrl });
       }
     }
 
