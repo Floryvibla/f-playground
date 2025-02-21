@@ -17,7 +17,7 @@ export async function generateImageFx({
     accept: "*/*",
     "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
     authorization:
-      "Bearer ya29.a0ARW5m76jVz5Jm-oVfEBnx5EMiD9omfykqtc-krbnEJ6XaB85ng-W2mvPQGfC_LhK3c4on5APArvmwTqAHLTuRYJGGw6o4OiX9XUxjRf9TPwTa685c6vxUP6FNff0VxE9FMdWhE9-7pRZZxJmRXOwfFcqQ7fBmZLQ5zFlNS9EcfIFPOt0myFwD83zuwYRnc07VGjCCQ7HS-121ma4Oh3nVSbV24lD1oFiyEa7HWjc0HVNZmFKgr-1gzSYzhGvo7_B4QRk6ee__HPoq_xE1MtI-zy7wFZMYm6HYJRLXNFWaLV8eAHd8qZBt0ZNEUFUW6EFaZl1SjWy1NLH9k-nzrlujkyS8YBVGpYGZMbNlwu6QyYGateKTVLRq7QWH5gPWyHuFY9vJkaPo5lIgbBlj_C4UavEB7dcvW47ksJhpgpJaCgYKAfESARMSFQHGX2MiXer3o0wN9AjhtNpYtaNcZA0431",
+      "Bearer ya29.a0AXeO80Seo0pjI2RgYDyU30ax6HBoh0FvUccSY5-kBmgbZiWCRLR4fA_gHhF7b8atTQtdIED4q4NVynKvVqn2BRaSXyt2die7awkxzNxyd62t2Td3SpOj3NOVCcIVG2f4yq3GkyFY7BrJT5YKqS37y77Lxf4KMK6k9C1yoIwictThsBtzsp2-rxp3SNdegRkuV8pMmZs6SysZU48VgIdPulNSnr8lZvY74gVpOT0xoOTfQEvAIIky0prvXWy_J9A5tBqcL-i8PYb80YIi0c4glGnPf1ZE_5jF_ppLg-dVTOP32w9WoGeb8uGnlA7bgosV9FHZFGKnl3s4B8bjabtaSCzhZRLcAYci31K1t2GHMsO_sxwV6bYSITr5g89OdyPM2ZK5v0bqjjtlMbSYSVdnd_y9V3Tvuw9WuyENWebNMQaCgYKAfsSARMSFQHGX2MiVxuk5gTdJU-twqWTii_Z5g0433",
     "content-type": "text/plain;charset=UTF-8",
     origin: "https://labs.google",
     priority: "u=1, i",

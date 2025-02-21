@@ -6,13 +6,10 @@ import {
 import {
   GoogleAIFileManager,
   FileState,
-  FileMetadataResponse,
 } from "@google/generative-ai/server";
-import { generateObject, generateText } from "ai";
+import { generateObject } from "ai";
 import { createGoogleGenerativeAI, google } from "@ai-sdk/google";
 import { z } from "zod";
-import { title } from "process";
-import { createNewsletterPrompt } from "./prompts";
 
 export const genAI = new GoogleGenerativeAI(
   process.env.GOOGLE_GENERATIVE_AI_API_KEY!
