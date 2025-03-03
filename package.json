@@ -22,13 +22,17 @@
     "next": "15.1.0",
     "puppeteer": "^23.11.1",
     "puppeteer-core": "^23.11.1",
+    "qrcode-terminal": "^0.12.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "whatsapp-web.js": "^1.26.0",
+    "youtube-transcript": "^1.2.1",
     "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/asana": "^0.18.16",
     "@types/node": "^20",
+    "@types/qrcode-terminal": "^0.12.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "postcss": "^8",
