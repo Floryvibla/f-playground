@@ -19,3 +19,7 @@ body {
   background: var(--background);
   font-family: var(--font-montserrat);
 }
+
+.maskImageEditor {
+  mask-image: linear-gradient(to bottom, #000000 80%, rgba(0, 0, 0, 0) 80%);
+}
