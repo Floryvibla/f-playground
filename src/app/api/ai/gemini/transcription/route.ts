@@ -20,8 +20,11 @@ export async function POST(req: Request) {
       apiKey
     );
     return Response.json({ responseTranscription });
-  } catch (error) {
+  } catch (error: any) {
     console.log("Error: ", error);
-    return Response.json({ error: "Falha ao processar" }, { status: 500 });
+    return Response.json(
+      { error: "Falha ao processar", msg: error.response },
+      { status: 500 }
+    );
   }
 }
