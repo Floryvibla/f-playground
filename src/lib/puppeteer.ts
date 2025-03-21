@@ -7,7 +7,7 @@ export async function puppeteerProd(): Promise<BrowserCore> {
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
+    headless: chromium.headless as boolean | "chrome" | undefined,
   });
 
   return browser;
