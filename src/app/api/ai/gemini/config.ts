@@ -77,11 +77,15 @@ const promptTranscriptionContentPT = `Gere o subtitle para esse video, escreva o
 export async function getTranscriptionGemini(
   urlVideo: string,
   content?: string,
-  contentType?: string
+  contentType?: string,
+  apikey?: string
 ) {
+  const googleModelCustom = createGoogleGenerativeAI({
+    apiKey: apikey || process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+  });
   try {
     const { object } = await generateObject({
-      model: google("gemini-1.5-flash-latest"),
+      model: googleModelCustom("gemini-1.5-flash-latest"),
       messages: [
         {
           role: "user",
