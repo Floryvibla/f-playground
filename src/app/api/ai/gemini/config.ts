@@ -3,10 +3,7 @@ import {
   HarmBlockThreshold,
   HarmCategory,
 } from "@google/generative-ai";
-import {
-  GoogleAIFileManager,
-  FileState,
-} from "@google/generative-ai/server";
+import { GoogleAIFileManager, FileState } from "@google/generative-ai/server";
 import { generateObject } from "ai";
 import { createGoogleGenerativeAI, google } from "@ai-sdk/google";
 import { z } from "zod";
@@ -77,18 +74,22 @@ export async function fileUploadGemini(path?: string) {
 const promptTranscriptionContentPT = `Gere o subtitle para esse video, escreva o subtitle em formato de SRT, retorna isso em portugues BR se o video não estava em portugues brasileiro. seja fiel nas palavras do video.`;
 // const promptTranscriptionContent = `"Gere o subtitle para esse video, escreva o subtitle em formato de SRT, retorna isso no idioma original do video"`;
 
-export async function getTranscriptionGemini(urlVideo: string) {
+export async function getTranscriptionGemini(
+  urlVideo: string,
+  content?: string,
+  contentType?: string
+) {
   try {
     const { object } = await generateObject({
       model: google("gemini-1.5-flash-latest"),
       messages: [
         {
           role: "user",
-          content: promptTranscriptionContentPT,
+          content: content || promptTranscriptionContentPT,
           experimental_attachments: [
             {
               url: urlVideo,
-              contentType: "video/mp4",
+              contentType: contentType || "video/mp4",
             },
           ],
         },
