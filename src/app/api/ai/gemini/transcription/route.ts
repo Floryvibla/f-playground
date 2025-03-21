@@ -5,13 +5,19 @@ export async function POST(req: Request) {
     urlMedia,
     contentType,
     prompt,
-  }: { urlMedia: string; prompt?: string; contentType?: string } =
-    await req.json();
+    apiKey,
+  }: {
+    urlMedia: string;
+    prompt?: string;
+    contentType?: string;
+    apiKey?: string;
+  } = await req.json();
   try {
     const responseTranscription = await getTranscriptionGemini(
       urlMedia,
       prompt,
-      contentType
+      contentType,
+      apiKey
     );
     return Response.json({ responseTranscription });
   } catch (error) {
