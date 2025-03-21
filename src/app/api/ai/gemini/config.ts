@@ -80,12 +80,12 @@ export async function getTranscriptionGemini(
   contentType?: string,
   apikey?: string
 ) {
-  const googleModelCustom = createGoogleGenerativeAI({
-    apiKey: apikey || process.env.GOOGLE_GENERATIVE_AI_API_KEY,
-  });
+  // const googleModelCustom = createGoogleGenerativeAI({
+  //   apiKey: apikey || process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+  // });
   try {
     const { object } = await generateObject({
-      model: googleModelCustom("gemini-1.5-flash-latest"),
+      model: google("gemini-1.5-flash-latest"),
       messages: [
         {
           role: "user",
